@@ -1,0 +1,128 @@
+// Copyright 2023 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package mobility.collision;
+
+import "eigenmath/eigenmath.proto";
+import "collision/hull.proto";
+
+// This proto specifies a geometric area that can be used to construct the
+// geometry of the overall goal region, see GoalGeometryProto.
+//
+// Next Id: 3
+message GoalZoneProto {
+  // A radial segment is a sort of "piece of a donut" shape.
+  // Next Id: 6
+  message RadialSegment {
+    // Center of the radial segment.
+    eigenmath.Vector2dProto center = 1;
+    // The inner radius, meaning that the robot should not finish closer
+    // than this radius to the center of the donut.
+    double inner_radius = 2;
+    // The outer radius, meaning that the robot should not finish farther
+    // than this radius to the center of the donut.
+    double outer_radius = 3;
+    // The start angle of the piece of the donut shape, in radians, ccw from the
+    // frame's x axis, where frame is specified in the DriveToCommandProto
+    // "frame" field.
+    double start_angle = 4;
+    // The end angle of the piece of the donut shape, in radians, ccw from the
+    // frame's x axis, where frame is specified in the DriveToCommandProto
+    // "frame" field.
+    double end_angle = 5;
+    // The end_angle and start_angle values do not have to be in [-pi, pi]
+    // interval and will be treated as going ccw from start to end.
+    // The end_angle must always be greater than the start_angle, i.e., without
+    // wrapping around. If the end_angle is more than 2*pi greater than the
+    // start_angle, then it is a full circle.
+  }
+
+  oneof geometry {
+    RadialSegment radial_segment = 1;
+    HullProto hull = 2;
+  }
+}
+
+// This proto describes the goal for navigation tasks, as a geometric
+// description of all valid target poses:
+//  - A goal region that covers all the areas within which a planner could
+//    consider the goal to have been achieved (success).
+//  - An attraction field that determines, through a bias, where in the goal
+//    region it is most desirable to end up (e.g., closest to a point, farthest
+//    in a given direction).
+//  - An orientation specification that determines what the desired
+//    orientation is (which may depend on the robot's position).
+//
+// The frame of reference for the geometry elements should be documented in
+// the context where this proto is used.
+// All dimensions are in meters and radians.
+//
+// Next Id: 12
+message GoalGeometryProto {
+  message Empty {}
+
+  // Specifies the preference in the inclusion zone.  If no inclusion zone is
+  // specified, `attraction_point` can be used to set a single goal point.
+  //
+  // Defaults to 'uniform'.
+  oneof attraction_spec {
+    // This field implies that there is no preferred point in the goal region.
+    Empty uniform = 1;
+    // This field specifies the coordinates of the preferred goal point.
+    eigenmath.Vector2dProto attraction_point = 2;
+    // This field specifies in what direction the best goal point within the
+    // goal region is. For example, if direction points along x-axis, then the
+    // goal point that is furthest along the x-axis while still being within
+    // the goal region and reachable (e.g. collision-free) will be picked.
+    eigenmath.Vector2dProto attraction_direction = 10;
+  }
+
+  // The inclusion zone specifies the region within which the robot should
+  // be in order to consider the command successful.
+  GoalZoneProto inclusion_zone = 3;
+  // The exclusion zone specifies a region that the robot should not finish
+  // the command in.
+  // For example, when you want to move to a point without getting too close
+  // to it, you can put an exclusion zone around the goal.
+  GoalZoneProto exclusion_zone = 4;
+
+  // This field specifies the desired final orientation of a command.
+  // This is the direction towards which the robot should be pointing once the
+  // command is successful.
+  //
+  // Defaults to 'no_orientation'.
+  oneof orientation_spec {
+    // This field specifies that final orientation is not important.
+    Empty no_orientation = 6;
+    // This field specifies the final orientation that is desired, in radians,
+    // ccw from x-axis.
+    double orientation = 7;
+    // This field specifies a point towards which the robot should be pointing
+    // when it has arrived at the goal point, i.e., a sort of "look at" point.
+    eigenmath.Vector2dProto face_towards_point = 8;
+  }
+
+  // Defines the range of orientations [target - radius, target + radius] around
+  // the target set in `orientation_spec` that are part of the goal.
+  // Has no effect if `no_orientation` is specified.
+  double orientation_radius = 9;
+
+  // Distance tolerance of the controller (allowed error to target pose).
+  double distance_tolerance = 5;
+
+  // Orientation tolerance of the controller (allowed error to target pose).
+  double orientation_tolerance = 11;
+}

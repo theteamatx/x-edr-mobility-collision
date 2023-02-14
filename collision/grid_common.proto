@@ -1,0 +1,48 @@
+// Copyright 2023 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package mobility.collision;
+
+import "eigenmath/eigenmath.proto";
+
+// A grid index is a type (x,y) of integer values. The X index goes
+// along the underlying continuous X axis, with an index of zero
+// corresponding to the origin. Similarly for Y. Negative values are
+// allowed (and common).
+//
+// A range in a grid is a bounding box over indices. The lower bounds
+// are inclusive, and upper bounds exclusive.
+//
+// Next Id: 5
+message GridRangeProto {
+  int32 lower_x = 1;
+  int32 lower_y = 2;
+  int32 upper_x = 3;
+  int32 upper_y = 4;
+}
+
+// The shared information of a basic 2D grid frame.
+// Next ID: 4
+message GridFrameProto {
+  // Frame ID of the grid.
+  string frame_id = 1;
+
+  // Origin of the map.
+  eigenmath.Pose2dProto origin = 2;
+
+  // The size of a single grid cell (in meters).
+  double resolution = 3;
+}
