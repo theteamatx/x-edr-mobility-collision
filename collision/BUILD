@@ -27,7 +27,7 @@ proto_library(
     ],
     deps = [
         ":hull_proto",
-        "@eigenmath//eigenmath:eigenmath_proto",
+        "@x_edr_eigenmath//eigenmath:eigenmath_proto",
     ],
 )
 
@@ -55,9 +55,9 @@ cc_library(
         "@com_google_absl//absl/log",
         "@com_google_absl//absl/functional:function_ref",
         "@com_google_absl//absl/strings:str_format",
-        "@eigenmath//eigenmath",
-        "@genit//genit:iterators",
-        "@mobility_diff_drive//diff_drive:differential_drive",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_genit//genit:iterators",
+        "@x_edr_mobility_diff_drive//diff_drive:differential_drive",
     ],
 )
 
@@ -67,10 +67,10 @@ cc_test(
     deps = [
         ":collision_checking",
         "@com_google_googletest//:gtest_main",
-        "@eigenmath//eigenmath",
-        "@eigenmath//eigenmath:matchers",
-        "@mobility_diff_drive//diff_drive:differential_drive",
-        "@mobility_diff_drive//diff_drive:test_fixtures",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath:matchers",
+        "@x_edr_mobility_diff_drive//diff_drive:differential_drive",
+        "@x_edr_mobility_diff_drive//diff_drive:test_fixtures",
     ],
 )
 
@@ -87,9 +87,9 @@ cc_library(
         ":grid_common",
         ":occupancy_grid",
         "@com_google_absl//absl/algorithm:container",
-        "@eigenmath//eigenmath",
-        "@genit//genit:iterators",
-        "@mobility_diff_drive//diff_drive:differential_drive",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_genit//genit:iterators",
+        "@x_edr_mobility_diff_drive//diff_drive:differential_drive",
     ],
 )
 
@@ -104,9 +104,9 @@ cc_test(
         ":grid_test_utils",
         "@com_google_benchmark//:benchmark",
         "@com_google_googletest//:gtest_main",
-        "@eigenmath//eigenmath",
-        "@eigenmath//eigenmath:matchers",
-        "@mobility_diff_drive//diff_drive:test_fixtures",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath:matchers",
+        "@x_edr_mobility_diff_drive//diff_drive:test_fixtures",
     ],
 )
 
@@ -119,8 +119,8 @@ cc_test(
         ":collision_checking",
         "@com_google_benchmark//:benchmark",
         "@com_google_googletest//:gtest_main",
-        "@eigenmath//eigenmath:matchers",
-        "@mobility_diff_drive//diff_drive:test_fixtures",
+        "@x_edr_eigenmath//eigenmath:matchers",
+        "@x_edr_mobility_diff_drive//diff_drive:test_fixtures",
     ],
 )
 
@@ -132,8 +132,8 @@ cc_test(
     deps = [
         ":collision_checking",
         "@com_google_googletest//:gtest_main",
-        "@eigenmath//eigenmath:matchers",
-        "@mobility_diff_drive//diff_drive:test_fixtures",
+        "@x_edr_eigenmath//eigenmath:matchers",
+        "@x_edr_mobility_diff_drive//diff_drive:test_fixtures",
     ],
 )
 
@@ -148,8 +148,8 @@ cc_library(
     deps = [
         "@com_google_absl//absl/log",
         "@com_google_absl//absl/functional:any_invocable",
-        "@eigenmath//eigenmath",
-        "@genit//genit:iterators",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_genit//genit:iterators",
     ],
 )
 
@@ -162,8 +162,8 @@ cc_test(
         ":gaussian_mixture_model_2d",
         "@com_google_googletest//:gtest_main",
         "@com_google_absl//absl/strings",
-        "@eigenmath//eigenmath",
-        "@eigenmath//eigenmath:matchers",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath:matchers",
     ],
 )
 
@@ -181,7 +181,7 @@ cc_library(
         ":lattice_pose",
         "@com_google_absl//absl/functional:function_ref",
         "@com_google_absl//absl/types:variant",
-        "@eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath",
     ],
 )
 
@@ -193,7 +193,7 @@ cc_test(
     deps = [
         ":goal_geometry",
         "@com_google_googletest//:gtest_main",
-        "@eigenmath//eigenmath:matchers",
+        "@x_edr_eigenmath//eigenmath:matchers",
     ],
 )
 
@@ -204,7 +204,7 @@ proto_library(
     ],
     deps = [
         ":hull_proto",
-        "@eigenmath//eigenmath:eigenmath_proto",
+        "@x_edr_eigenmath//eigenmath:eigenmath_proto",
     ],
 )
 
@@ -227,8 +227,8 @@ cc_library(
         ":hull_conversion",
         "@com_google_absl//absl/log",
         "@com_google_absl//absl/status",
-        "@eigenmath//eigenmath:eigenmath_cc_proto",
-        "@eigenmath//eigenmath:conversions",
+        "@x_edr_eigenmath//eigenmath:eigenmath_cc_proto",
+        "@x_edr_eigenmath//eigenmath:conversions",
     ],
 )
 
@@ -251,7 +251,7 @@ proto_library(
         "hull.proto",
     ],
     deps = [
-        "@eigenmath//eigenmath:eigenmath_proto",
+        "@x_edr_eigenmath//eigenmath:eigenmath_proto",
     ],
 )
 
@@ -281,7 +281,7 @@ cc_library(
     hdrs = ["collision_probabilities.h"],
     deps = [
         ":collision_checking",
-        "@eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath",
     ],
 )
 
@@ -304,9 +304,9 @@ cc_library(
     hdrs = ["convex_hull_conversions.h"],
     deps = [
         ":collision_checking",
-        "@eigenmath//eigenmath:eigenmath_cc_proto",
-        "@eigenmath//eigenmath:conversions",
-        "@eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath:eigenmath_cc_proto",
+        "@x_edr_eigenmath//eigenmath:conversions",
+        "@x_edr_eigenmath//eigenmath",
     ],
 )
 
@@ -345,8 +345,8 @@ cc_test(
         ":grid_test_utils",
         ":collision_checking",
         ":collision_utils",
-        "@mobility_diff_drive//diff_drive:test_fixtures",
         "@com_google_googletest//:gtest_main",
+        "@x_edr_mobility_diff_drive//diff_drive:test_fixtures",
     ],
 )
 
@@ -355,13 +355,13 @@ cc_library(
     srcs = ["grid_common.cc"],
     hdrs = ["grid_common.h"],
     deps = [
-        "@eigenmath//eigenmath",
-        "@genit//genit:iterators",
         "@com_google_absl//absl/container:flat_hash_map",
         "@com_google_absl//absl/container:flat_hash_set",
         "@com_google_absl//absl/container:node_hash_map",
         "@com_google_absl//absl/hash",
         "@com_google_absl//absl/strings",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_genit//genit:iterators",
     ],
 )
 
@@ -371,12 +371,12 @@ cc_test(
     deps = [
         ":grid_common",
         ":occupancy_grid",
-        "@eigenmath//eigenmath",
-        "@eigenmath//eigenmath:sampling",
-        "@eigenmath//eigenmath:matchers",
-        "@genit//genit:iterators",
         "@com_google_benchmark//:benchmark",
         "@com_google_googletest//:gtest_main",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath:sampling",
+        "@x_edr_eigenmath//eigenmath:matchers",
+        "@x_edr_genit//genit:iterators",
     ],
 )
 
@@ -385,7 +385,7 @@ proto_library(
     srcs = [
         "grid_common.proto",
     ],
-    deps = ["@eigenmath//eigenmath:eigenmath_proto"],
+    deps = ["@x_edr_eigenmath//eigenmath:eigenmath_proto"],
 )
 
 cc_proto_library(
@@ -404,9 +404,9 @@ cc_library(
     deps = [
         ":grid_common",
         ":grid_common_cc_proto",
-        "@eigenmath//eigenmath:eigenmath_cc_proto",
-        "@eigenmath//eigenmath:conversions",
         "@com_google_absl//absl/status",
+        "@x_edr_eigenmath//eigenmath:eigenmath_cc_proto",
+        "@x_edr_eigenmath//eigenmath:conversions",
     ],
 )
 
@@ -419,11 +419,11 @@ cc_test(
         ":grid_common",
         ":grid_common_cc_proto",
         ":grid_common_conversion",
-        "@eigenmath//eigenmath",
-        "@eigenmath//eigenmath:matchers",
-        "@eigenmath//eigenmath:eigenmath_cc_proto",
-        "@eigenmath//eigenmath:conversions",
         "@com_google_googletest//:gtest_main",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath:matchers",
+        "@x_edr_eigenmath//eigenmath:eigenmath_cc_proto",
+        "@x_edr_eigenmath//eigenmath:conversions",
     ],
 )
 
@@ -440,10 +440,10 @@ cc_library(
         ":cost_grid_utils",
         ":grid_common",
         ":occupancy_grid",
-        "@eigenmath//eigenmath",
         "@com_google_googletest//:gtest",
         "@com_google_absl//absl/functional:function_ref",
         "@com_google_absl//absl/strings",
+        "@x_edr_eigenmath//eigenmath",
     ],
 )
 
@@ -476,10 +476,10 @@ cc_test(
     srcs = ["lattice_pose_test.cc"],
     deps = [
         ":lattice_pose",
-        "@eigenmath//eigenmath",
-        "@eigenmath//eigenmath:sampling",
-        "@eigenmath//eigenmath:matchers",
         "@com_google_googletest//:gtest_main",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath:sampling",
+        "@x_edr_eigenmath//eigenmath:matchers",
     ],
 )
 
@@ -490,11 +490,11 @@ cc_library(
     ],
     deps = [
         ":grid_common",
-        "@eigenmath//eigenmath",
         "@com_google_absl//absl/log:check",
         "@com_google_absl//absl/status:statusor",
         "@com_google_absl//absl/strings",
         "@com_google_absl//absl/strings:str_format",
+        "@x_edr_eigenmath//eigenmath",
     ],
 )
 
@@ -505,10 +505,10 @@ cc_test(
     ],
     deps = [
         ":occupancy_grid",
-        "@eigenmath//eigenmath:sampling",
         "@com_google_benchmark//:benchmark",
         "@com_google_googletest//:gtest_main",
         "@com_google_absl//absl/random:distributions",
+        "@x_edr_eigenmath//eigenmath:sampling",
     ],
 )
 
@@ -519,11 +519,11 @@ cc_library(
     deps = [
         ":grid_common",
         ":occupancy_grid",
-        "@eigenmath//eigenmath",
-        "@genit//genit:iterators",
         ":collision_utils",
         "@com_google_absl//absl/container:inlined_vector",
         "@com_google_absl//absl/types:optional",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_genit//genit:iterators",
     ],
 )
 
@@ -535,10 +535,10 @@ cc_test(
         ":grid_test_utils",
         ":occupancy_grid",
         ":occupancy_grid_utils",
-        "@eigenmath//eigenmath",
-        "@eigenmath//eigenmath:matchers",
-        "@genit//genit:iterators",
         "@com_google_googletest//:gtest_main",
+        "@x_edr_eigenmath//eigenmath",
+        "@x_edr_eigenmath//eigenmath:matchers",
+        "@x_edr_genit//genit:iterators",
     ],
 )
 
@@ -567,10 +567,10 @@ cc_library(
         ":grid_common_conversion",
         ":occupancy_grid",
         ":occupancy_grid_cc_proto",
-        "@eigenmath//eigenmath:eigenmath_cc_proto",
-        "@eigenmath//eigenmath:conversions",
         "@com_google_absl//absl/status",
         "@com_google_absl//absl/strings",
+        "@x_edr_eigenmath//eigenmath:eigenmath_cc_proto",
+        "@x_edr_eigenmath//eigenmath:conversions",
     ],
 )
 
